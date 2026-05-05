@@ -1,0 +1,15 @@
+# Use a pre-configured image that includes Wine and Python 3.11 for Windows
+FROM tobix/pywine:3.11
+
+# Set the working directory inside the container
+WORKDIR /src
+
+# Copy your dependency list into the container
+COPY requirements.txt .
+
+# Install your dependencies into the Windows Python environment using Wine
+# Note: PyQt6/PySide6 can be heavy, so this ensures they are cached in the Docker layer
+RUN wine pip install -r requirements.txt pyinstaller
+
+# We do not set an ENTRYPOINT or CMD here because we will pass the PyInstaller
+# command dynamically from our shared Python script.

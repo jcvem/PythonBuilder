@@ -1,0 +1,7 @@
+.DS_Store
+
+.mac_build_env/
+
+build/
+dist/
+*.spec
